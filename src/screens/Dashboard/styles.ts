@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { FlatList, FlatListProps } from 'react-native'
+import { FlatList, FlatListProps, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
@@ -66,6 +66,8 @@ export const UserName = styled.Text`
     font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
+export const LogoutButton = styled(TouchableOpacity)``;
+
 export const Icon = styled(Feather)`
     color: ${({ theme }) => theme.colors.secondary};
     font-size: ${RFValue(24)}px;
@@ -103,6 +105,5 @@ export const TransactionList = styled(
     contentContainerStyle: {
         paddingBottom: getBottomSpace()
     }
-})`
+})``;
 
-`;

@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler'
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import AppLoading from 'expo-app-loading'
