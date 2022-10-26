@@ -4,12 +4,12 @@ import { Feather } from '@expo/vector-icons'
 import { RFValue } from 'react-native-responsive-fontsize';
 
 interface IconsProps {
-    type: 'up' | 'down';
+    type: 'positive' | 'negative';
 }
 
 interface ContainerProps {
     isActive: boolean;
-    type: 'up' | 'down';
+    type: 'positive' | 'negative';
 }
 
 export const Container = styled(TouchableOpacity)<ContainerProps>`
@@ -26,11 +26,11 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
 
     padding: 16px;
 
-    ${({ isActive, type }) => isActive && type === 'up' && css`
+    ${({ isActive, type }) => isActive && type === 'positive' && css`
         background-color: ${({ theme }) => theme.colors.success_light}
     `}
 
-    ${({ isActive, type }) => isActive && type === 'down' && css`
+    ${({ isActive, type }) => isActive && type === 'negative' && css`
         background-color: ${({ theme }) => theme.colors.attention_light}
     `}
 `;
@@ -40,7 +40,7 @@ export const Icon = styled(Feather)<IconsProps>`
     margin-right: 12px;
 
     color: ${({ theme, type }) => 
-        type === 'up' ? theme.colors.success : theme.colors.attention
+        type === 'positive' ? theme.colors.success : theme.colors.attention
     }
 `;
 

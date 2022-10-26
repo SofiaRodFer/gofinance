@@ -66,7 +66,7 @@ export function Register() {
 
   const formControl = control as unknown as Control<FieldValues, any>
 
-  function handleTransactionTypeSelect(type: 'up' | 'down') {
+  function handleTransactionTypeSelect(type: 'positive' | 'negative') {
     setTransactionType(type)
   }
 
@@ -151,17 +151,17 @@ export function Register() {
 
               <TransactionTypes>
                 <TransactionTypeButton
-                  type='up'
+                  type='positive'
                   title='Income'
-                  onPress={() => handleTransactionTypeSelect('up')}
-                  isActive={transactionType === 'up'}
+                  onPress={() => handleTransactionTypeSelect('positive')}
+                  isActive={transactionType === 'positive'}
                 />
 
                 <TransactionTypeButton
-                  type='down'
+                  type='negative'
                   title='Outcome'
-                  onPress={() => handleTransactionTypeSelect('down')}
-                  isActive={transactionType === 'down'}
+                  onPress={() => handleTransactionTypeSelect('negative')}
+                  isActive={transactionType === 'negative'}
                 />
               </TransactionTypes>
 

@@ -14,12 +14,12 @@ interface Props {
   title: string;
   amount: string;
   last_transaction: string;
-  type: 'up' | 'down' | 'total';
+  type: 'positive' | 'negative' | 'total';
 }
 
 const icon = {
-  up: 'arrow-up-circle',
-  down: 'arrow-down-circle',
+  positive: 'arrow-up-circle',
+  negative: 'arrow-down-circle',
   total: 'dollar-sign',
 }
 
