@@ -79,8 +79,6 @@ export function Register() {
   }
 
   async function handleRegister(form: FormData) {
-    const dataKey = '@gofinance:transactions'
-
     if(!transactionType) {
       return Alert.alert('Selecione o tipo da transação!')
     }
@@ -99,6 +97,7 @@ export function Register() {
     }
 
     try {
+      const dataKey = '@gofinance:transactions'
       const data = await AsyncStorage.getItem(dataKey)
       const currentData = data ? JSON.parse(data) : []
 

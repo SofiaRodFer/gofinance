@@ -37,7 +37,7 @@ interface HighlightProps {
 
 interface HighlightData {
     entries: HighlightProps;
-    spent: HighlightProps;
+    expenses: HighlightProps;
     total: HighlightProps;
 }
 
@@ -72,7 +72,7 @@ export function Dashboard() {
         const transactions = response ? JSON.parse(response) : []
 
         let entriesSum = 0
-        let spentSum = 0
+        let expensesSum = 0
 
 
         const transactionsFormatted: DataListProps[] = transactions
@@ -80,7 +80,7 @@ export function Dashboard() {
             if(item.transactionType === 'positive') {
                 entriesSum += Number(item.amount)
             } else {
-                spentSum += Number(item.amount)
+                expensesSum += Number(item.amount)
             }
 
             const amount = Number(item.amount)
@@ -108,10 +108,10 @@ export function Dashboard() {
         setTransactions(transactionsFormatted)
 
         const lastEntryDate = getLastTransactionDate(transactions, 'positive')
-        const lastSpentDate = getLastTransactionDate(transactions, 'negative')
-        const totalInterval = `01 à ${lastSpentDate}`
+        const lastExpenseDate = getLastTransactionDate(transactions, 'negative')
+        const totalInterval = `01 à ${lastExpenseDate}`
 
-        const total = entriesSum - spentSum
+        const total = entriesSum - expensesSum
 
         setHighlightData({
             entries: {
@@ -121,12 +121,12 @@ export function Dashboard() {
                 }),
                 lastTransaction: `Última entrada dia ${lastEntryDate}`
             },
-            spent: {
-                amount: spentSum.toLocaleString('pt-BR', {
+            expenses: {
+                amount: expensesSum.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 }),
-                lastTransaction: `Última entrada dia ${lastSpentDate}`
+                lastTransaction: `Última entrada dia ${lastExpenseDate}`
             },
             total: {
                 amount: total.toLocaleString('pt-BR', {
@@ -181,7 +181,7 @@ export function Dashboard() {
                     <HighlightCard
                         type="negative"
                         title="Saídas"
-                        amount={highlightData.spent.amount}
+                        amount={highlightData.expenses.amount}
                         last_transaction={highlightData.entries.lastTransaction}
                     />
                     <HighlightCard
