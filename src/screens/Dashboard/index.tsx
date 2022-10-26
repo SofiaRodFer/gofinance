@@ -104,6 +104,7 @@ export function Dashboard() {
                 date
             }
         })
+        .reverse()
 
         setTransactions(transactionsFormatted)
 
