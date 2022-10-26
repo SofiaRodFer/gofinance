@@ -3,16 +3,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VictoryPie } from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useTheme } from 'styled-components';
 
 import { HistoryCard } from '../../components/HistoryCard';
 
 import {
-    Container,
-    Header,
-    Title,
-    Content,
-    ChartContainer
+  Container,
+  Header,
+  Title,
+  Content,
+  ChartContainer,
+  MonthSelect,
+  MonthSelectButton,
+  MonthSelectIcon,
+  Month
 } from './styles';
 import { categories } from '../../utils/categories';
 
@@ -92,24 +97,43 @@ export function Summary() {
             <Title>Resumo por categoria</Title>
         </Header>
 
-        <ChartContainer>
-          <VictoryPie
-            data={totalByCategories}
-            colorScale={totalByCategories.map(category => category.color)}
-            style={{
-              labels: {
-                fontSize: RFValue(18),
-                fontWeight: 'bold',
-                fill: theme.colors.shape
-              }
-            }}
-            labelRadius={50}
-            x="percent"
-            y="total"
-          />
-        </ChartContainer>
+        <Content
+          contentContainerStyle={{
+            padding: 24,
+            paddingBottom: useBottomTabBarHeight()
+          }}
+          showVerticalScroll={false}
+        >
 
-        <Content>
+          <MonthSelect>
+            <MonthSelectButton>
+              <MonthSelectIcon name="chevron-left" />
+            </MonthSelectButton>
+
+            <Month>Outubro</Month>
+
+            <MonthSelectButton>
+              <MonthSelectIcon name="chevron-right" />
+            </MonthSelectButton>
+          </MonthSelect>
+
+          <ChartContainer>
+            <VictoryPie
+              data={totalByCategories}
+              colorScale={totalByCategories.map(category => category.color)}
+              style={{
+                labels: {
+                  fontSize: RFValue(18),
+                  fontWeight: 'bold',
+                  fill: theme.colors.shape
+                }
+              }}
+              labelRadius={50}
+              x="percent"
+              y="total"
+            />
+          </ChartContainer>
+
           { totalByCategories.map(item => (
             <HistoryCard
               key={item.key}
