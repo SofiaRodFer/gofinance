@@ -7,7 +7,7 @@ import React from 'react';
 import { AppRoutes } from './src/routes/app.routes';
 import { SignIn } from './src/screens/SignIn';
 
-import { AuthContext } from './src/AuthContext';
+import { AuthProvider } from './src/hooks/auth';
 
 
 import { StatusBar } from 'react-native';
@@ -39,9 +39,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StatusBar barStyle='light-content' translucent backgroundColor="transparent" />
-        <AuthContext.Provider value={[]}>
-          <SignIn />
-        </AuthContext.Provider>
+          <AuthProvider>
+            <SignIn />
+          </AuthProvider>
       </NavigationContainer>
     </ThemeProvider>
   );
