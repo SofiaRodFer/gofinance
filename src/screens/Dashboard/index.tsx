@@ -54,12 +54,18 @@ export function Dashboard() {
         collection: DataListProps[],
         type: 'positive' | 'negative') 
     {
+        const collectionFiltered = collection
+        .filter((transaction) => transaction.transactionType === type)
+
+        if(collectionFiltered.length === 0) {
+            return 0;
+        }
+
         const lastTransaction = 
         new Date(
             Math.max.apply(
                 Math,
-                collection
-                .filter((transaction) => transaction.transactionType === type)
+                collectionFiltered
                 .map((transaction) => new Date(transaction.date).getTime())
             )
         )
@@ -112,7 +118,9 @@ export function Dashboard() {
 
         const lastEntryDate = getLastTransactionDate(transactions, 'positive')
         const lastExpenseDate = getLastTransactionDate(transactions, 'negative')
-        const totalInterval = `01 à ${lastExpenseDate}`
+        const totalInterval =  lastExpenseDate === 0 
+            ? 'Não há transações' 
+            : `01 à ${lastExpenseDate}`
 
         const total = entriesSum - expensesSum
 
@@ -122,14 +130,18 @@ export function Dashboard() {
                     style: 'currency',
                     currency: 'BRL'
                 }),
-                lastTransaction: `Última entrada dia ${lastEntryDate}`
+                lastTransaction: lastEntryDate === 0 
+                    ? 'Ainda não há transações de entrada' 
+                    : `Última entrada dia ${lastEntryDate}`
             },
             expenses: {
                 amount: expensesSum.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 }),
-                lastTransaction: `Última entrada dia ${lastExpenseDate}`
+                lastTransaction: lastExpenseDate === 0 
+                    ? 'Ainda não há transações de saída' 
+                    : `Última saída dia ${lastExpenseDate}`
             },
             total: {
                 amount: total.toLocaleString('pt-BR', {
@@ -185,7 +197,7 @@ export function Dashboard() {
                         type="negative"
                         title="Saídas"
                         amount={highlightData.expenses.amount}
-                        last_transaction={highlightData.entries.lastTransaction}
+                        last_transaction={highlightData.expenses.lastTransaction}
                     />
                     <HighlightCard
                         type="total"
