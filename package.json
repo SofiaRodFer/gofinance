@@ -18,6 +18,7 @@
     "date-fns": "^2.29.3",
     "expo": "~46.0.16",
     "expo-app-loading": "~2.1.0",
+    "expo-apple-authentication": "~4.3.0",
     "expo-auth-session": "~3.7.1",
     "expo-constants": "~13.2.4",
     "expo-font": "~10.2.0",
