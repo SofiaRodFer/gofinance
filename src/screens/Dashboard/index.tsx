@@ -82,7 +82,6 @@ export function Dashboard() {
         let entriesSum = 0
         let expensesSum = 0
 
-
         const transactionsFormatted: DataListProps[] = transactions
         .map((item: DataListProps) => {
             if(item.transactionType === 'positive') {
